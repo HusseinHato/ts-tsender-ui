@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers"; // Import the Providers component
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "TSender",
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body>
         {/* Wrap the entire body content with Providers */}
         <Providers>
+          <Header />
           {children}
         </Providers>
       </body>
