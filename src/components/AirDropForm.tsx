@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import InputField from "./ui/InputField";
 import BevelButton from "./BevelButton";
 import { chainsToTSender, erc20Abi, tsenderAbi } from "@/constants";
 import { useChainId, useConfig, useAccount } from 'wagmi';
 import { readContract } from '@wagmi/core';
 import { isAddress } from 'viem';
+import { calculateTotal } from "@/utils";
 
 export default function AirDropForm() {
     const [tokenAddress, setTokenAddress] = useState<string>("");
@@ -15,6 +16,9 @@ export default function AirDropForm() {
     const account = useAccount();
     const chainId = useChainId();
     const config = useConfig();
+    const total: number = useMemo(() => calculateTotal(amount), [amount]);
+
+    console.log(total);
 
     async function getApprovedAmount(tSenderAddress: string | null): Promise<number> {
         if (!tSenderAddress) {
@@ -46,6 +50,7 @@ export default function AirDropForm() {
         console.log("TSender Address for this chain:", tSenderAddress);
         const approvedAmount = await getApprovedAmount(tSenderAddress)
         console.log("Approved Amount:", approvedAmount);
+        console.log("Total Amount", total);
     }
 
     return (
@@ -73,6 +78,9 @@ export default function AirDropForm() {
                 large={true}
                 type="text"
             />
+            <div>
+                <strong>Total: {total}</strong>
+            </div>
             <BevelButton type="submit" onClick={handleSubmit}>
                 Submit
             </BevelButton>
