@@ -5,13 +5,15 @@ interface BevelButtonProps {
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   className?: string;
+  disabled: true | false;
 }
 
 const BevelButton: React.FC<BevelButtonProps> = ({ 
   children, 
   onClick, 
   type = "button",
-  className = ""
+  className = "",
+  disabled
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -21,6 +23,7 @@ const BevelButton: React.FC<BevelButtonProps> = ({
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      disabled={disabled}
       className={`
         relative px-6 py-3 font-bold text-white 
         bg-gradient-to-b from-blue-600 to-blue-700 

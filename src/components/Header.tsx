@@ -7,7 +7,7 @@ export default function Header() {
     <header className="flex items-center justify-between p-4 border-b">
       {/* Left section - Logo and GitHub */}
       <div className="flex items-center space-x-4">
-        <div className="text-xl font-bold">Logo</div>
+        <div className="text-xl font-bold">AirdropERC20</div>
         <a 
           href="https://github.com/your-repo" 
           target="_blank" 
